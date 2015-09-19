@@ -25,20 +25,10 @@ type PushReqParams struct {
 func SendPush(args []string) (int, error) {
 	conf := config.LoadConfig()
 
-	msgBody := strings.Join(args[:], " ")
-	if len(args) == 0 {
-		msgBody = "(blank)"
-	}
-
-	params := PushReqParams{
-		conf.PushbulletUserEmail,
-		"note",
-		"You were mentioned in " + conf.Channel,
-		msgBody,
-	}
-
 	headers = make(map[string]string)
 	headers["Access-Token"] = conf.PushbulletAccessToken
+
+	params := SetPushReqParams(conf, args)
 
 	res, err := utils.HttpPostJson(apiBaseUrl+"/v2/pushes", headers, params)
 	if err != nil {
@@ -50,9 +40,23 @@ func SendPush(args []string) (int, error) {
 		if err != nil {
 			return 0, err
 		}
-		log.Print(fmt.Printf("%s\n", rawBody))
+		log.Println(fmt.Printf("%s\n", rawBody))
 		return res.StatusCode, fmt.Errorf(res.Status)
 	}
 
 	return res.StatusCode, nil
+}
+
+func SetPushReqParams(conf *config.ConfData, args []string) PushReqParams {
+	msgBody := strings.Join(args[:], " ")
+	if len(args) == 0 {
+		msgBody = "(blank)"
+	}
+
+	return PushReqParams{
+		conf.PushbulletUserEmail,
+		"note",
+		"You were mentioned in " + conf.Channel,
+		msgBody,
+	}
 }

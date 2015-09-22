@@ -15,6 +15,7 @@ type ConfData struct {
 	MessagePrefix         string `yaml:"message_prefix"`
 	PushbulletAccessToken string `yaml:"pushbullet_access_token"`
 	PushbulletUserEmail   string `yaml:"pushbullet_user_email"`
+	IgnoreNicks						[]string `yaml:"ignore_nicks"`
 }
 
 func LoadConfig() *ConfData {

@@ -1,8 +1,8 @@
 package commands
 
 import (
-	"../config"
-	"../utils"
+	"github.com/laouji/gaufre/config"
+	"github.com/laouji/gaufre/utils"
 	"fmt"
 	"io/ioutil"
 	"log"

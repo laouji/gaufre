@@ -7,3 +7,7 @@ admin_username: "example"
 message_prefix: "ʕ　·ᴥ·ʔ < "
 pushbullet_access_token: "****************"
 pushbullet_user_email: "example@example.com"
+ignore_nicks:
+  - "nicknames"
+  - "to"
+  - "ignore"
